@@ -61,7 +61,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/EventCreateInput'
                 
-  /v1/webhooks/{id}/endpoints:
+  /v1/webhooks/{id}/handlers:
     parameters:
     - name: id
       in: path
