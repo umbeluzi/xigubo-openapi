@@ -1,0 +1,210 @@
+
+openapi: 3.0.0
+info:
+  title: Plumber API
+  description: Real-time performance and health monitoring.
+  version: 1.0.0
+paths:
+  /v1/applications:
+    get:
+      responses:
+        "200":
+          description: lorem ipsum.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationsList'
+    post:
+      requestBody:
+        $ref: '#/components/requestBodies/ApplicationCreateInput'
+      responses:
+        "200":
+          description: lorem ipsum.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+                
+  /v1/applications/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      responses:
+        "200":
+          description: lorem ipsum.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+                
+  /v1/applications/{id}/events:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Cancel payment
+      description: lorem
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      requestBody:
+        $ref: '#/components/requestBodies/EventCreateInput'
+                
+  /v1/applications/{id}/endpoints:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Cancel payment
+      description: lorem
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endpoint'
+      requestBody:
+        $ref: '#/components/requestBodies/EndpointCreateInput'
+
+components:
+  requestBodies:
+    EventCreateInput:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventCreateInput'
+
+    EndpointCreateInput:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EndpointCreateInput'
+
+
+    ApplicationCreateInput:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplicationCreateInput'
+
+
+  schemas:
+    ApplicationsList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+            
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+
+    ApplicationCreateInput:
+      type: object
+      properties:
+        name:
+          type: string
+
+    EventCreateInput:
+      type: object
+      properties:
+        type:
+          type: string
+          example: customer.subscribe
+        data:
+          type: object
+
+    EndpointCreateInput:
+      type: object
+      properties:
+        url:
+          type: string
+          example: "https://example.com/v1/customers"
+        ca_certificate:
+          type: string
+        client_certificate:
+          type: string
+
+
+    Event:
+      type: object
+      properties:
+        id: 
+          type: string
+          format: uuid
+        type:
+          type: string
+          example: "customer.create"
+        data:
+          type: object
+        status:
+          type: object
+          properties:
+            code:
+              type: integer
+            class:
+              type: string
+              enum:
+              - SUCCESS
+              - FAILURE
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Endpoint:
+      type: object
+      properties:
+        id: 
+          type: string
+          format: uuid
+        type:
+          type: string
+          example: "customer.create"
+        data:
+          type: object
+        status:
+          type: object
+          properties:
+            code:
+              type: integer
+            class:
+              type: string
+              enum:
+              - SUCCESS
+              - FAILURE
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+
