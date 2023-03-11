@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.0
 info:
-  title: Plumber API
+  title: Switch API
   description: Real-time performance and health monitoring.
   version: 1.0.0
 paths:
@@ -19,6 +19,7 @@ paths:
                 $ref: '#/components/schemas/WebhooksList'
     post:
       operationId: CreateWebhook
+      summary: Create webhook
       tags:
       - webhooks
       requestBody:
@@ -40,6 +41,31 @@ paths:
         type: string
     get:
       operationId: GetWebhook
+      summary: Get Webhook
+      tags:
+      - webhooks
+      responses:
+        "200":
+          description: lorem ipsum.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+    put:
+      operationId: UpdateWebhook
+      summary: Update Webhook
+      tags:
+      - webhooks
+      responses:
+        "200":
+          description: lorem ipsum.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+    delete:
+      operationId: DeleteWebhook
+      summary: DeleteWebhook
       tags:
       - webhooks
       responses:
@@ -57,9 +83,22 @@ paths:
       required: true
       schema:
         type: string
+    get:
+      operationId: ListEvents
+      summary: List Events
+      description: lorem
+      tags:
+      - events
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
     post:
       operationId: CreateEvent
-      summary: Cancel payment
+      summary: Create Event
       description: lorem
       tags:
       - events
@@ -80,9 +119,22 @@ paths:
       required: true
       schema:
         type: string
+    get:
+      operationId: ListTargets
+      summary: List Targets
+      description: lorem
+      tags:
+      - targets
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
     post:
       operationId: CreateTarget
-      summary: Cancel payment
+      summary: Create Target
       description: lorem
       tags:
       - targets
@@ -96,7 +148,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/TargetCreateInput'
 
-  /v1/webhooks/{webhookId}/targets/{targetId}/tokens:
+  /v1/webhooks/{webhookId}/targets/{targetId}:
     parameters:
     - name: webhookId
       in: path
@@ -108,9 +160,9 @@ paths:
       required: true
       schema:
         type: string
-    post:
-      operationId: CreateToken
-      summary: Cancel payment
+    get:
+      operationId: GetTarget
+      summary: Get Target
       description: lorem
       tags:
       - targets
@@ -121,6 +173,100 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Token'
+    put:
+      operationId: UpdateTarget
+      summary: Update Target
+      description: lorem
+      tags:
+      - targets
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+    delete:
+      operationId: DeleteTarget
+      summary: Delete Target
+      description: lorem
+      tags:
+      - targets
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+
+
+  /v1/webhooks/{webhookId}/events/{eventId}:
+    parameters:
+    - name: webhookId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: eventId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: GetEvent
+      summary: Get Event
+      description: lorem
+      tags:
+      - events
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+
+
+  /v1/webhooks/{webhookId}/targets/{targetId}/token:
+    parameters:
+    - name: webhookId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: targetId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: GetToken
+      summary: Get Token
+      description: lorem
+      tags:
+      - targets
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+    post:
+      operationId: CreateToken
+      summary: Create Token
+      description: lorem
+      tags:
+      - targets
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+
 
 components:
   requestBodies:
