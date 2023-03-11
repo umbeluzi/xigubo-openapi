@@ -5,7 +5,7 @@ info:
   description: Real-time performance and health monitoring.
   version: 1.0.0
 paths:
-  /v1/applications:
+  /v1/webhooks:
     get:
       responses:
         "200":
@@ -13,19 +13,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApplicationsList'
+                $ref: '#/components/schemas/WebhooksList'
     post:
       requestBody:
-        $ref: '#/components/requestBodies/ApplicationCreateInput'
+        $ref: '#/components/requestBodies/WebhookCreateInput'
       responses:
         "200":
           description: lorem ipsum.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Application'
+                $ref: '#/components/schemas/Webhook'
                 
-  /v1/applications/{id}:
+  /v1/webhooks/{id}:
     parameters:
     - name: id
       in: path
@@ -39,9 +39,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Application'
+                $ref: '#/components/schemas/Webhook'
                 
-  /v1/applications/{id}/events:
+  /v1/webhooks/{id}/events:
     parameters:
     - name: id
       in: path
@@ -61,7 +61,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/EventCreateInput'
                 
-  /v1/applications/{id}/endpoints:
+  /v1/webhooks/{id}/endpoints:
     parameters:
     - name: id
       in: path
@@ -98,24 +98,24 @@ components:
             $ref: '#/components/schemas/EndpointCreateInput'
 
 
-    ApplicationCreateInput:
+    WebhookCreateInput:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ApplicationCreateInput'
+            $ref: '#/components/schemas/WebhookCreateInput'
 
 
   schemas:
-    ApplicationsList:
+    WebhooksList:
       type: object
       properties:
-        applications:
+        webhooks:
           type: array
           items:
-            $ref: '#/components/schemas/Application'
+            $ref: '#/components/schemas/Webhook'
             
-    Application:
+    Webhook:
       type: object
       properties:
         id:
@@ -124,7 +124,7 @@ components:
         name:
           type: string
 
-    ApplicationCreateInput:
+    WebhookCreateInput:
       type: object
       properties:
         name:
