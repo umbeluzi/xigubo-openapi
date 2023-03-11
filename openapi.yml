@@ -77,9 +77,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Endpoint'
+                $ref: '#/components/schemas/Handler'
       requestBody:
-        $ref: '#/components/requestBodies/EndpointCreateInput'
+        $ref: '#/components/requestBodies/HandlerCreateInput'
 
 components:
   requestBodies:
@@ -90,12 +90,12 @@ components:
           schema:
             $ref: '#/components/schemas/EventCreateInput'
 
-    EndpointCreateInput:
+    HandlerCreateInput:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/EndpointCreateInput'
+            $ref: '#/components/schemas/HandlerCreateInput'
 
 
     WebhookCreateInput:
@@ -139,7 +139,7 @@ components:
         data:
           type: object
 
-    EndpointCreateInput:
+    HandlerCreateInput:
       type: object
       properties:
         url:
@@ -179,7 +179,7 @@ components:
           type: string
           format: date-time
 
-    Endpoint:
+    Handler:
       type: object
       properties:
         id: 
