@@ -61,7 +61,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/EventCreateInput'
                 
-  /v1/webhooks/{webhookId}/handlers:
+  /v1/webhooks/{webhookId}/targets:
     parameters:
     - name: webhookId
       in: path
@@ -81,14 +81,14 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/TargetCreateInput'
 
-  /v1/webhooks/{webhookId}/handlers/{handlerId}/tokens:
+  /v1/webhooks/{webhookId}/targets/{targetId}/tokens:
     parameters:
     - name: webhookId
       in: path
       required: true
       schema:
         type: string
-    - name: handlerId
+    - name: targetId
       in: path
       required: true
       schema:
