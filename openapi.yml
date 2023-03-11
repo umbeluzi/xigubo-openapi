@@ -8,6 +8,8 @@ paths:
   /v1/webhooks:
     get:
       operationId: ListWebhooks
+      tags:
+      - webhooks
       responses:
         "200":
           description: lorem ipsum.
@@ -17,6 +19,8 @@ paths:
                 $ref: '#/components/schemas/WebhooksList'
     post:
       operationId: CreateWebhook
+      tags:
+      - webhooks
       requestBody:
         $ref: '#/components/requestBodies/WebhookCreateInput'
       responses:
@@ -36,6 +40,8 @@ paths:
         type: string
     get:
       operationId: GetWebhook
+      tags:
+      - webhooks
       responses:
         "200":
           description: lorem ipsum.
@@ -55,6 +61,8 @@ paths:
       operationId: CreateEvent
       summary: Cancel payment
       description: lorem
+      tags:
+      - events
       responses:
         "200":
           description: netdata basic information.
@@ -76,6 +84,8 @@ paths:
       operationId: CreateTarget
       summary: Cancel payment
       description: lorem
+      tags:
+      - targets
       responses:
         "200":
           description: netdata basic information.
@@ -102,6 +112,8 @@ paths:
       operationId: CreateToken
       summary: Cancel payment
       description: lorem
+      tags:
+      - targets
       responses:
         "200":
           description: netdata basic information.
@@ -243,4 +255,3 @@ components:
         updated_at:
           type: string
           format: date-time
-
