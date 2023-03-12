@@ -347,9 +347,11 @@ components:
     EventCreateInput:
       type: object
       properties:
-        type:
+        event_type:
           type: string
           example: customer.subscribe
+        topic:
+          type: string
         data:
           type: object
 
@@ -363,6 +365,21 @@ components:
         url:
           type: string
           example: "https://example.com/v1/customers"
+        filter:
+          type: object
+          properties:
+            topics:
+              type: array
+              items:
+                type: string
+            event_types:
+              type: array
+              items:
+                type: string
+        topics:
+          type: array
+          items:
+            type: string
         rate_limit:
           type: object
         timeout:
