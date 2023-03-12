@@ -5,12 +5,12 @@ info:
   description: Real-time performance and health monitoring.
   version: 1.0.0
 paths:
-  /v1/webhooks:
+  /v1/events-types:
     get:
-      operationId: ListWebhooks
-      summary: List webhooks
+      operationId: ListEventTypes
+      summary: List event types
       tags:
-      - webhooks
+      - event types
       responses:
         "200":
           description: lorem ipsum.
@@ -22,7 +22,7 @@ paths:
       operationId: CreateWebhook
       summary: Create webhook
       tags:
-      - webhooks
+      - event types
       requestBody:
         $ref: '#/components/requestBodies/WebhookCreateInput'
       responses:
@@ -33,18 +33,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Webhook'
                 
-  /v1/webhooks/{webhookId}:
+  /v1/events-types/{eventTypeId}:
     parameters:
-    - name: webhookId
+    - name: eventTypeId
       in: path
       required: true
       schema:
         type: string
     get:
-      operationId: GetWebhook
-      summary: Get Webhook
+      operationId: GetEventType
+      summary: Get event type
       tags:
-      - webhooks
+      - event types
       responses:
         "200":
           description: lorem ipsum.
@@ -53,10 +53,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Webhook'
     put:
-      operationId: UpdateWebhook
-      summary: Update Webhook
+      operationId: UpdateEventType
+      summary: Update event type
       tags:
-      - webhooks
+      - event types
       responses:
         "200":
           description: lorem ipsum.
@@ -65,10 +65,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Webhook'
     delete:
-      operationId: DeleteWebhook
-      summary: DeleteWebhook
+      operationId: DeleteEventType
+      summary: Delete event type
       tags:
-      - webhooks
+      - event types
       responses:
         "200":
           description: lorem ipsum.
