@@ -274,7 +274,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: GetEvent
+      operationId: ResendEvent
       summary: Get Event
       description: lorem
       tags:
