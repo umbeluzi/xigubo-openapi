@@ -201,7 +201,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Subscription'
 
-
   /v1/webhooks/{webhookId}/events/{eventId}:
     parameters:
     - name: webhookId
@@ -227,7 +226,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Credentials'
-
 
   /v1/webhooks/{webhookId}/subscriptions/{subscriptionId}/credentials:
     parameters:
@@ -268,6 +266,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/Credentials'
 
+  /v1/events/{eventId}/retry:
+    parameters:
+    - name: eventId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: GetEvent
+      summary: Get Event
+      description: lorem
+      tags:
+      - events
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
 
 components:
   requestBodies:
@@ -338,13 +356,27 @@ components:
     SubscriptionCreateInput:
       type: object
       properties:
+        name:
+          type: string
+        description:
+          type: string
         url:
           type: string
           example: "https://example.com/v1/customers"
-        ca_certificate:
-          type: string
-        client_certificate:
-          type: string
+        rate_limit:
+          type: object
+        retry:
+          type: object
+        security:
+          type: object
+          properties:
+            tls_ca_cert:
+              type: string
+            tls_client_cert:
+              type: string
+      required:
+        - name
+        - description
 
     Event:
       type: object
