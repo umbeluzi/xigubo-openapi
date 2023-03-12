@@ -365,8 +365,21 @@ components:
           example: "https://example.com/v1/customers"
         rate_limit:
           type: object
+        timeout:
+          type: integer
         retry:
           type: object
+          properties:
+            strategy:
+              type: string
+              enum:
+                - EXPONENTIAL
+                - LINEAR
+                - CONSTANT
+              initial_interval:
+                type: integer
+              max_attempts:
+                type: integer
         security:
           type: object
           properties:
