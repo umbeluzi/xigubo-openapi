@@ -376,10 +376,10 @@ components:
                 - EXPONENTIAL
                 - LINEAR
                 - CONSTANT
-              initial_interval:
-                type: integer
-              max_attempts:
-                type: integer
+            initial_interval:
+              type: integer
+            max_attempts:
+              type: integer
         security:
           type: object
           properties:
