@@ -113,7 +113,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/EventCreateInput'
                 
-  /v1/webhooks/{webhookId}/subscribers:
+  /v1/webhooks/{webhookId}/subscriptions:
     parameters:
     - name: webhookId
       in: path
@@ -121,85 +121,85 @@ paths:
       schema:
         type: string
     get:
-      operationId: ListSubscribers
-      summary: List Subscribers
+      operationId: ListSubscriptions
+      summary: List Subscriptions
       description: lorem
       tags:
-      - subscribers
+      - subscriptions
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscriber'
+                $ref: '#/components/schemas/Subscription'
     post:
-      operationId: CreateSubscriber
-      summary: Create Subscriber
+      operationId: CreateSubscription
+      summary: Create Subscription
       description: lorem
       tags:
-      - subscribers
+      - subscriptions
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscriber'
+                $ref: '#/components/schemas/Subscription'
       requestBody:
-        $ref: '#/components/requestBodies/SubscriberCreateInput'
+        $ref: '#/components/requestBodies/SubscriptionCreateInput'
 
-  /v1/webhooks/{webhookId}/subscribers/{subscriberId}:
+  /v1/webhooks/{webhookId}/subscriptions/{subscriptionId}:
     parameters:
     - name: webhookId
       in: path
       required: true
       schema:
         type: string
-    - name: subscriberId
+    - name: subscriptionId
       in: path
       required: true
       schema:
         type: string
     get:
-      operationId: GetSubscriber
-      summary: Get Subscriber
+      operationId: GetSubscription
+      summary: Get Subscription
       description: lorem
       tags:
-      - subscribers
+      - subscriptions
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscriber'
+                $ref: '#/components/schemas/Subscription'
     put:
-      operationId: UpdateSubscriber
-      summary: Update Subscriber
+      operationId: UpdateSubscription
+      summary: Update Subscription
       description: lorem
       tags:
-      - subscribers
+      - subscriptions
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscriber'
+                $ref: '#/components/schemas/Subscription'
     delete:
-      operationId: DeleteSubscriber
-      summary: Delete Subscriber
+      operationId: DeleteSubscription
+      summary: Delete Subscription
       description: lorem
       tags:
-      - subscribers
+      - subscriptions
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscriber'
+                $ref: '#/components/schemas/Subscription'
 
 
   /v1/webhooks/{webhookId}/events/{eventId}:
@@ -229,14 +229,14 @@ paths:
                 $ref: '#/components/schemas/Credentials'
 
 
-  /v1/webhooks/{webhookId}/subscribers/{subscriberId}/credentials:
+  /v1/webhooks/{webhookId}/subscriptions/{subscriptionId}/credentials:
     parameters:
     - name: webhookId
       in: path
       required: true
       schema:
         type: string
-    - name: subscriberId
+    - name: subscriptionId
       in: path
       required: true
       schema:
@@ -246,7 +246,7 @@ paths:
       summary: Get Credentials
       description: lorem
       tags:
-      - subscribers
+      - subscriptions
       responses:
         "200":
           description: netdata basic information.
@@ -259,7 +259,7 @@ paths:
       summary: Update Credentials
       description: lorem
       tags:
-      - subscribers
+      - subscriptions
       responses:
         "200":
           description: netdata basic information.
@@ -278,12 +278,12 @@ components:
           schema:
             $ref: '#/components/schemas/EventCreateInput'
 
-    SubscriberCreateInput:
+    SubscriptionCreateInput:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SubscriberCreateInput'
+            $ref: '#/components/schemas/SubscriptionCreateInput'
 
 
     WebhookCreateInput:
@@ -335,7 +335,7 @@ components:
         data:
           type: object
 
-    SubscriberCreateInput:
+    SubscriptionCreateInput:
       type: object
       properties:
         url:
@@ -374,7 +374,7 @@ components:
           type: string
           format: date-time
 
-    Subscriber:
+    Subscription:
       type: object
       properties:
         id: 
