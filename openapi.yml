@@ -8,6 +8,7 @@ paths:
   /v1/webhooks:
     get:
       operationId: ListWebhooks
+      summary: List webhooks
       tags:
       - webhooks
       responses:
@@ -112,7 +113,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/EventCreateInput'
                 
-  /v1/webhooks/{webhookId}/targets:
+  /v1/webhooks/{webhookId}/subscribers:
     parameters:
     - name: webhookId
       in: path
@@ -120,85 +121,85 @@ paths:
       schema:
         type: string
     get:
-      operationId: ListTargets
-      summary: List Targets
+      operationId: ListSubscribers
+      summary: List Subscribers
       description: lorem
       tags:
-      - targets
+      - subscribers
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Target'
+                $ref: '#/components/schemas/Subscriber'
     post:
-      operationId: CreateTarget
-      summary: Create Target
+      operationId: CreateSubscriber
+      summary: Create Subscriber
       description: lorem
       tags:
-      - targets
+      - subscribers
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Target'
+                $ref: '#/components/schemas/Subscriber'
       requestBody:
-        $ref: '#/components/requestBodies/TargetCreateInput'
+        $ref: '#/components/requestBodies/SubscriberCreateInput'
 
-  /v1/webhooks/{webhookId}/targets/{targetId}:
+  /v1/webhooks/{webhookId}/subscribers/{subscriberId}:
     parameters:
     - name: webhookId
       in: path
       required: true
       schema:
         type: string
-    - name: targetId
+    - name: subscriberId
       in: path
       required: true
       schema:
         type: string
     get:
-      operationId: GetTarget
-      summary: Get Target
+      operationId: GetSubscriber
+      summary: Get Subscriber
       description: lorem
       tags:
-      - targets
+      - subscribers
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/Subscriber'
     put:
-      operationId: UpdateTarget
-      summary: Update Target
+      operationId: UpdateSubscriber
+      summary: Update Subscriber
       description: lorem
       tags:
-      - targets
+      - subscribers
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/Subscriber'
     delete:
-      operationId: DeleteTarget
-      summary: Delete Target
+      operationId: DeleteSubscriber
+      summary: Delete Subscriber
       description: lorem
       tags:
-      - targets
+      - subscribers
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/Subscriber'
 
 
   /v1/webhooks/{webhookId}/events/{eventId}:
@@ -225,47 +226,47 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/Credentials'
 
 
-  /v1/webhooks/{webhookId}/targets/{targetId}/token:
+  /v1/webhooks/{webhookId}/subscribers/{subscriberId}/credentials:
     parameters:
     - name: webhookId
       in: path
       required: true
       schema:
         type: string
-    - name: targetId
+    - name: subscriberId
       in: path
       required: true
       schema:
         type: string
     get:
-      operationId: GetToken
-      summary: Get Token
+      operationId: GetCredentials
+      summary: Get Credentials
       description: lorem
       tags:
-      - targets
+      - subscribers
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
-    post:
-      operationId: CreateToken
-      summary: Create Token
+                $ref: '#/components/schemas/Credentials'
+    put:
+      operationId: UpdateCredentials
+      summary: Update Credentials
       description: lorem
       tags:
-      - targets
+      - subscribers
       responses:
         "200":
           description: netdata basic information.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/Credentials'
 
 
 components:
@@ -277,12 +278,12 @@ components:
           schema:
             $ref: '#/components/schemas/EventCreateInput'
 
-    TargetCreateInput:
+    SubscriberCreateInput:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/TargetCreateInput'
+            $ref: '#/components/schemas/SubscriberCreateInput'
 
 
     WebhookCreateInput:
@@ -310,7 +311,7 @@ components:
         name:
           type: string
 
-    Token:
+    Credentials:
       type: object
       properties:
         secret:
@@ -334,7 +335,7 @@ components:
         data:
           type: object
 
-    TargetCreateInput:
+    SubscriberCreateInput:
       type: object
       properties:
         url:
@@ -344,7 +345,6 @@ components:
           type: string
         client_certificate:
           type: string
-
 
     Event:
       type: object
@@ -374,7 +374,7 @@ components:
           type: string
           format: date-time
 
-    Target:
+    Subscriber:
       type: object
       properties:
         id: 
