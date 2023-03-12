@@ -24,7 +24,7 @@ paths:
       tags:
       - event types
       requestBody:
-        $ref: '#/components/requestBodies/WebhookCreateInput'
+        $ref: '#/components/requestBodies/WebhookCreate'
       responses:
         "200":
           description: lorem ipsum.
@@ -111,7 +111,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Event'
       requestBody:
-        $ref: '#/components/requestBodies/EventCreateInput'
+        $ref: '#/components/requestBodies/EventCreate'
                 
   /v1/webhooks/{webhookId}/subscriptions:
     parameters:
@@ -147,7 +147,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Subscription'
       requestBody:
-        $ref: '#/components/requestBodies/SubscriptionCreateInput'
+        $ref: '#/components/requestBodies/SubscriptionCreate'
 
   /v1/webhooks/{webhookId}/subscriptions/{subscriptionId}:
     parameters:
@@ -289,27 +289,27 @@ paths:
 
 components:
   requestBodies:
-    EventCreateInput:
+    EventCreate:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/EventCreateInput'
+            $ref: '#/components/schemas/EventCreate'
 
-    SubscriptionCreateInput:
+    SubscriptionCreate:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SubscriptionCreateInput'
+            $ref: '#/components/schemas/SubscriptionCreate'
 
 
-    WebhookCreateInput:
+    WebhookCreate:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/WebhookCreateInput'
+            $ref: '#/components/schemas/WebhookCreate'
             
   schemas:
     WebhooksList:
@@ -338,13 +338,13 @@ components:
           type: string
           format: date-time
 
-    WebhookCreateInput:
+    WebhookCreate:
       type: object
       properties:
         name:
           type: string
 
-    EventCreateInput:
+    EventCreate:
       type: object
       properties:
         event_type:
@@ -355,7 +355,7 @@ components:
         data:
           type: object
 
-    SubscriptionCreateInput:
+    SubscriptionCreate:
       type: object
       properties:
         name:
