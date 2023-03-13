@@ -1,8 +1,8 @@
 ---
 openapi: 3.0.0
 info:
-  title: Switch API
-  description: Real-time performance and health monitoring.
+  title: Xigubo API
+  description: lorem.
   version: 1.0.0
 paths:
   /v1/events-types:
@@ -19,8 +19,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/WebhooksList'
     post:
-      operationId: CreateWebhook
-      summary: Create webhook
+      operationId: CreateEventType
+      summary: Create event type
       tags:
       - event types
       requestBody:
@@ -32,7 +32,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Webhook'
-                
+
   /v1/events-types/{eventTypeId}:
     parameters:
     - name: eventTypeId
@@ -76,7 +76,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Webhook'
-                
+
   /v1/webhooks/{webhookId}/events:
     parameters:
     - name: webhookId
@@ -86,13 +86,13 @@ paths:
         type: string
     get:
       operationId: ListEvents
-      summary: List Events
+      summary: List events
       description: lorem
       tags:
       - events
       responses:
         "200":
-          description: netdata basic information.
+          description: lorem.
           content:
             application/json:
               schema:
@@ -105,14 +105,14 @@ paths:
       - events
       responses:
         "200":
-          description: netdata basic information.
+          description: lorem.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Event'
       requestBody:
         $ref: '#/components/requestBodies/EventCreate'
-                
+
   /v1/webhooks/{webhookId}/subscriptions:
     parameters:
     - name: webhookId
@@ -122,26 +122,26 @@ paths:
         type: string
     get:
       operationId: ListSubscriptions
-      summary: List Subscriptions
+      summary: List subscriptions
       description: lorem
       tags:
       - subscriptions
       responses:
         "200":
-          description: netdata basic information.
+          description: lorem.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Subscription'
     post:
       operationId: CreateSubscription
-      summary: Create Subscription
+      summary: Create subscription
       description: lorem
       tags:
       - subscriptions
       responses:
         "200":
-          description: netdata basic information.
+          description: lorem.
           content:
             application/json:
               schema:
@@ -163,39 +163,39 @@ paths:
         type: string
     get:
       operationId: GetSubscription
-      summary: Get Subscription
+      summary: Get subscription
       description: lorem
       tags:
       - subscriptions
       responses:
         "200":
-          description: netdata basic information.
+          description: lorem.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Subscription'
     put:
       operationId: UpdateSubscription
-      summary: Update Subscription
+      summary: Update subscription
       description: lorem
       tags:
       - subscriptions
       responses:
         "200":
-          description: netdata basic information.
+          description: lorem.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Subscription'
     delete:
       operationId: DeleteSubscription
-      summary: Delete Subscription
+      summary: Delete subscription
       description: lorem
       tags:
       - subscriptions
       responses:
         "200":
-          description: netdata basic information.
+          description: lorem.
           content:
             application/json:
               schema:
@@ -215,7 +215,7 @@ paths:
         type: string
     get:
       operationId: GetEvent
-      summary: Get Event
+      summary: Get event
       description: lorem
       tags:
       - events
@@ -226,6 +226,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Credentials'
+
+  /v1/events/{eventId}/delivery-attempts:
+    parameters:
+    - name: eventId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: ListDeliveryAttempts
+      summary: List delivery attempts
+      description: lorem
+      tags:
+      - events
+      responses:
+        "200":
+          description: lorem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryAttempt'
 
   /v1/webhooks/{webhookId}/subscriptions/{subscriptionId}/credentials:
     parameters:
@@ -241,7 +262,7 @@ paths:
         type: string
     get:
       operationId: GetCredentials
-      summary: Get Credentials
+      summary: Get credentials
       description: lorem
       tags:
       - subscriptions
@@ -254,7 +275,7 @@ paths:
                 $ref: '#/components/schemas/Credentials'
     put:
       operationId: UpdateCredentials
-      summary: Update Credentials
+      summary: Update credentials
       description: lorem
       tags:
       - subscriptions
@@ -273,9 +294,30 @@ paths:
       required: true
       schema:
         type: string
-    get:
+    post:
       operationId: ResendEvent
-      summary: Get Event
+      summary: Resend event
+      description: lorem
+      tags:
+      - events
+      responses:
+        "200":
+          description: netdata basic information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+
+  /v1/events/{eventId}/cancel:
+    parameters:
+    - name: eventId
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: CancelEvent
+      summary: Cancel event
       description: lorem
       tags:
       - events
@@ -310,7 +352,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/WebhookCreate'
-            
+
   schemas:
     WebhooksList:
       type: object
@@ -319,7 +361,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Webhook'
-            
+
     Webhook:
       type: object
       properties:
@@ -355,6 +397,13 @@ components:
         data:
           type: object
 
+    DeliveryAttempt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+
     SubscriptionCreate:
       type: object
       properties:
@@ -376,6 +425,23 @@ components:
               type: array
               items:
                 type: string
+        config:
+          type: object
+          properties:
+            tls_ca_cert:
+              type: string
+            tls_client_cert:
+              type: string
+            timeout:
+              type: integer
+            retry_strategy:
+              type: string
+              enum:
+                - EXPONENTIAL
+            retry_deadline:
+              type: integer
+            retry_max_retries:
+              type: integer
         topics:
           type: array
           items:
@@ -411,7 +477,7 @@ components:
     Event:
       type: object
       properties:
-        id: 
+        id:
           type: string
           format: uuid
         type:
@@ -439,7 +505,7 @@ components:
     Subscription:
       type: object
       properties:
-        id: 
+        id:
           type: string
           format: uuid
         type:
